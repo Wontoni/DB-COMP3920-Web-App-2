@@ -23,8 +23,8 @@ var users = [];
 // const node_session_secret = process.env.NODE_SESSION_SECRET;
 /* END secret section */
 
-const mongodb_user = "wonton";
-const mongodb_password = "Wontonious098123";
+const mongodb_user = 'wonton';
+const mongodb_password = 'Wontonious098123';
 const mongodb_session_secret = "a05829a5-52dd-4cfc-a597-0c475344aba3";
 
 const node_session_secret = "ca6b4903-94b1-4b9d-8f5a-97a4f4ab6ef8";
