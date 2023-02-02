@@ -1,5 +1,4 @@
-const dotenv = require('dotenv').config()
-
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -32,8 +31,15 @@ const node_session_secret = "ca6b4903-94b1-4b9d-8f5a-97a4f4ab6ef8";
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
 
+// var mongoStore = MongoStore.create({
+//     mongoUrl: `mongodb+srv://${mongodb_user}:${mongodb_password}@cluster0.dyx5jlr.mongodb.net/test`,
+// 	crypto: {
+// 		secret: mongodb_session_secret
+// 	}
+// });
+
 var mongoStore = MongoStore.create({
-    mongoUrl: `mongodb+srv://${mongodb_user}:${mongodb_password}@cluster0.dyx5jlr.mongodb.net/test`,
+    mongoUrl: `mongodb+srv://${mongodb_user}:${mongodb_password}@cluster0.dyx5jlr.mongodb.net/?retryWrites=true&w=majority`,
 	crypto: {
 		secret: mongodb_session_secret
 	}
