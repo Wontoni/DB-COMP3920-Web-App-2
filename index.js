@@ -58,7 +58,10 @@ app.get('/signup', (req,res) => { // Get Signup
     if (req.session.authenticated) {
         res.redirect('/members');
     } else {
-        res.render("signup")
+        var userMsg = req.query.userMsg;
+        var passMsg = req.query.passMsg;
+        var emailMsg = req.query.emailMsg;
+        res.render("signup", {userMsg: userMsg, emailMsg: emailMsg, passMsg: passMsg})
     }
 });
 
@@ -69,9 +72,23 @@ app.post('/createUser', (req,res)=> { // Post Signup
 
     var hashedPassword = bcrypt.hashSync(password, saltRounds);
 
-    users.push({ username: username, email: email, password: hashedPassword });
 
-    res.redirect('/')
+    if (email && password && username) {
+        users.push({ username: username, email: email, password: hashedPassword });
+        res.redirect('/')
+    } else {
+        if(!username) {
+            var userMsg = "Please enter a username.";
+        }
+        if (!password) {
+            var passMsg = "Please enter a password.";
+        }
+        if (!email) {
+            var emailMsg = "Please enter an email.";
+        }
+
+        res.redirect(`/signup?userMsg=${userMsg}&emailMsg=${emailMsg}&passMsg=${passMsg}`)
+    }
 });
 
 
@@ -114,6 +131,18 @@ app.post('/loginUser', (req,res)=> { // Post Login
         }
 
         res.redirect(`/login?userMsg=${userMsg}&passMsg=${passMsg}`)
+
+
+        // if(!username) {
+        //     var userMsg = "Please enter a username."
+        //     var test = "userMsg="
+        // }
+        // if (!password) {
+        //     var passMsg = "Please enter a password."
+        //     var test2 = "passMsg="
+        // }
+
+        // res.redirect(`/login?${test}${userMsg}&${test2}${passMsg}`)
     }
 
 });
@@ -123,7 +152,7 @@ app.get('/members', (req,res) =>{ // Members Page
         res.redirect('/login');
     } else {
         var username = req.session.username;
-        var imgId = Math.floor(Math.random() * 3 + 1)
+        var imgId = Math.floor(Math.random() * 4 + 1)
         res.render("members", {username: username, imgId: imgId})
     }
 })

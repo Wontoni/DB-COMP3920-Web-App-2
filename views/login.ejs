@@ -13,10 +13,10 @@
         <input name="password" type="text" placeholder="password"> <br>
         <button>Login</button>
         <a href="/signup" style="color:black; text-decoration: none;"><button type="button">Sign Up</button></a> <br>
-        <% if (userMsg) { %>
+        <% if (userMsg != "undefined") { %>
             <br> <%=userMsg%>
         <% } 
-        if (passMsg) {%>
+        if (passMsg != "undefined") {%>
             <br> <%=passMsg%>
         <% } %>
 
