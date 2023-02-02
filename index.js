@@ -16,12 +16,18 @@ const expireTime = 60 * 60 * 1000; //expires after 1 hour  (hours * minutes * se
 var users = []; 
 
 /* secret information section */
-const mongodb_user = process.env.MONGODB_USER;
-const mongodb_password = process.env.MONGODB_PASSWORD;
-const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
+// const mongodb_user = process.env.MONGODB_USER;
+// const mongodb_password = process.env.MONGODB_PASSWORD;
+// const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 
-const node_session_secret = process.env.NODE_SESSION_SECRET;
+// const node_session_secret = process.env.NODE_SESSION_SECRET;
 /* END secret section */
+
+const mongodb_user = "wonton";
+const mongodb_password = "Wontonious098123";
+const mongodb_session_secret = "a05829a5-52dd-4cfc-a597-0c475344aba3";
+
+const node_session_secret = "ca6b4903-94b1-4b9d-8f5a-97a4f4ab6ef8";
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
@@ -106,7 +112,6 @@ app.post('/loginUser', (req,res)=> { // Post Login
         if (!password) {
             var passMsg = "Please enter a password."
         }
-        // var encodedParam = encodeURIComponent
 
         res.redirect(`/login?userMsg=${userMsg}&passMsg=${passMsg}`)
     }
