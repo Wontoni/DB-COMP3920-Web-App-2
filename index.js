@@ -22,21 +22,8 @@ const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
 /* END secret section */
 
-// const mongodb_user = 'wonton';
-// const mongodb_password = 'Wontonious098123';
-// const mongodb_session_secret = "a05829a5-52dd-4cfc-a597-0c475344aba3";
-
-// const node_session_secret = "ca6b4903-94b1-4b9d-8f5a-97a4f4ab6ef8";
-
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
-
-// var mongoStore = MongoStore.create({
-//     mongoUrl: `mongodb+srv://${mongodb_user}:${mongodb_password}@cluster0.dyx5jlr.mongodb.net/test`,
-// 	crypto: {
-// 		secret: mongodb_session_secret
-// 	}
-// });
 
 var mongoStore = MongoStore.create({
     mongoUrl: `mongodb+srv://${mongodb_user}:${mongodb_password}@cluster0.dyx5jlr.mongodb.net/?retryWrites=true&w=majority`,
@@ -58,7 +45,7 @@ app.get('/', (req,res) => { // Homepage
     } else {
         res.render("index")
     }
-}); // TEST THIS
+}); 
 
 app.get('/signup', (req,res) => { // Get Signup
     if (req.session.authenticated) {
@@ -137,18 +124,6 @@ app.post('/loginUser', (req,res)=> { // Post Login
         }
 
         res.redirect(`/login?userMsg=${userMsg}&passMsg=${passMsg}`)
-
-
-        // if(!username) {
-        //     var userMsg = "Please enter a username."
-        //     var test = "userMsg="
-        // }
-        // if (!password) {
-        //     var passMsg = "Please enter a password."
-        //     var test2 = "passMsg="
-        // }
-
-        // res.redirect(`/login?${test}${userMsg}&${test2}${passMsg}`)
     }
 
 });
@@ -161,19 +136,19 @@ app.get('/members', (req,res) =>{ // Members Page
         var imgId = Math.floor(Math.random() * 4 + 1)
         res.render("members", {username: username, imgId: imgId})
     }
-})
+});
 
 app.post('/sign-out', (req,res) => {
     req.session.authenticated = false;
     res.redirect("/")
-})
+});
 
 app.use(express.static(__dirname + "/public"));
 
 app.get("*", (req,res) => { // 404 Catch All
 	res.status(404);
 	res.render("404")
-})
+});
 
 app.listen(port, () => {
 	console.log("Node application listening on port " + port);
