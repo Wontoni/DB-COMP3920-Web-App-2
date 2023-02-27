@@ -182,7 +182,7 @@ app.get(`/admin/user/:id`, async (req,res) => {
     var viewUser = await db_queries.getUsersAdminID({user_id: req.params.id});
     var loggedInAdmin = req.session.username;
 
-    res.render("adminUserTodo", {username: loggedInAdmin, todoItems: todoItems, viewUser: viewUser.username});
+    res.render("adminUserTodo", {username: loggedInAdmin, todoItems: todoItems, viewUser: viewUser[0].username});
 })
 
 app.post('/sign-out', (req,res) => {
