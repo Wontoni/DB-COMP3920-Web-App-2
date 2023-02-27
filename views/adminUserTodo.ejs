@@ -1,0 +1,19 @@
+<%- include("templates/header") %> 
+    <h1>Hello, <%=username%>.</h1>
+    <h2>You are viewing <%=viewUser%>'s To Do</h2>
+
+    <table>
+        <tr>
+            <th> &ensp; # &ensp; </th>
+            <th> &ensp; Description &ensp; </th>
+        </tr>
+        <% let i=0; %>
+		<% for(i=0; i < todoItems.length; i++) { %>
+            <%- include('templates/todo', {todoItem: todoItems[i], index: i + 1})  %> 
+        <% } %> 
+    </table>
+
+    <form action="/admin" method="get">
+        <button>Back</button>
+    </form>
+<%- include("templates/footer") %> 

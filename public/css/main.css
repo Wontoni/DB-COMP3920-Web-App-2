@@ -1,0 +1,13 @@
+table, th, td {
+    border: 1px solid black;
+  }
+
+.form-inline {  
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+h2 {
+  color: red;
+}
