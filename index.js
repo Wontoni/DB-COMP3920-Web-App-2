@@ -144,7 +144,8 @@ app.post('/loginUser', async (req,res) => { // Post Login
             } else {
                 //user and password combination not found
                 console.log('Invalid number of users found: ' + results.length);
-                res.redirect("/login");
+                var userMsg = "Invalid login credentials."
+                res.redirect(`/login?userMsg=${userMsg}`)
             }
         } else {
             var userMsg = "Invalid login credentials."
