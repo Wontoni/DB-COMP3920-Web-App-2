@@ -139,10 +139,7 @@ app.post('/loginUser', async (req,res) => { // Post Login
                     return;
                 } else {
                     var userMsg = "Invalid login credentials."
-                    $('#username').val('');
-                    $('#password').val('');
-                    $('#userMsg').val(userMsg);
-                    // res.redirect(`/login?userMsg=${userMsg}`)
+                    res.redirect(`/login?userMsg=${userMsg}`)
                 }
             } else {
                 //user and password combination not found
