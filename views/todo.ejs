@@ -1,21 +1,19 @@
-<%- include("templates/header") %> 
+<%- include("templates/header", {styles: ["css/todo.css"], scripts: ["https://code.jquery.com/jquery-3.6.3.js","scripts/main.js"]}) %> 
     <h1>Hello, <%=username%>.</h1>
 
-    <table>
+    <table id="todoTable">
         <tr>
             <th> &ensp; # &ensp; </th>
             <th> &ensp; Description &ensp; </th>
         </tr>
         <% let i=0; %>
 		<% for(i=0; i < todoItems.length; i++) { %>
-            <%- include('templates/todo', {todoItem: todoItems[i], index: i + 1})  %> 
+            <%- include('templates/todoItem', {todoItem: todoItems[i].description, index: i + 1})  %> 
         <% } %> 
     </table>
-    <!-- MAKE INPUT HERE -->
-    <form action="/createTodo" method="post" class="form-inline">
-        <input name="description" type="text" placeholder="What needs to be done?" required> <br>
-        <button>Add</button>
-    </form> <br>
+
+    <input id="inputDescription" name="description" type="text" placeholder="What needs to be done?" required>
+    <button id="addButton">Add</button> <br> <br>
     
     <form action="/sign-out" method="post">
         <button>Sign Out</button>

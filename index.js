@@ -194,6 +194,7 @@ app.post('/createTodo', async (req, res) => {
     var description = req.body.description;
 
     var success = await db_queries.createTodo({ description: description, user_id: req.session.user_id});
+    
     // TODO: AJAX CALL
     res.redirect('/todo') 
 })
