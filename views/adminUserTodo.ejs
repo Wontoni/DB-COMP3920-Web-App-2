@@ -9,7 +9,7 @@
         </tr>
         <% let i=0; %>
 		<% for(i=0; i < todoItems.length; i++) { %>
-            <%- include('templates/todoItem', {todoItem: todoItems[i], index: i + 1})  %> 
+            <%- include('templates/todoItem', {todoItem: todoItems[i].description, index: i + 1})  %> 
         <% } %> 
     </table>
 

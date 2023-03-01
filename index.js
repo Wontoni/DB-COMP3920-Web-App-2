@@ -2,6 +2,7 @@ require('./utils');
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
+const ejs = require('ejs');
 const MongoStore = require('connect-mongo');
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
@@ -193,10 +194,16 @@ app.post('/sign-out', (req,res) => {
 app.post('/createTodo', async (req, res) => {
     var description = req.body.description;
 
-    var success = await db_queries.createTodo({ description: description, user_id: req.session.user_id});
-    
-    // TODO: AJAX CALL
-    res.redirect('/todo') 
+    await db_queries.createTodo({ description: description, user_id: req.session.user_id});
+    var allItems = await db_queries.getTodos({user_id: req.session.user_id});
+
+    ejs.renderFile('views/templates/todoItem.ejs',{todoItem: description, index: allItems.length},function(err,data){
+        if (err) {
+            console.log(err);
+            return err;
+        }
+        return data;
+       })
 })
 
 function isValidSession(req) {
