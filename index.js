@@ -197,13 +197,7 @@ app.post('/createTodo', async (req, res) => {
     await db_queries.createTodo({ description: description, user_id: req.session.user_id});
     var allItems = await db_queries.getTodos({user_id: req.session.user_id});
 
-    ejs.renderFile('views/templates/todoItem.ejs',{todoItem: description, index: allItems.length},function(err,data){
-        if (err) {
-            console.log(err);
-            return err;
-        }
-        return data;
-       })
+    res.render('templates/todoItem',{todoItem: description, index: allItems.length})
 })
 
 function isValidSession(req) {

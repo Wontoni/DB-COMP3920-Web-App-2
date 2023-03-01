@@ -1,12 +1,12 @@
-<%- include("templates/header") %> 
+<%- include("templates/header", {styles: ["css/todo.css"]}) %> 
     <h1>Hello, <%=username%>.</h1>
 
     <ul>
         <% for (let i = 0; i < users.length; i++) { %>
             <%- include("templates/user", {username: users[i].username, index: i + 1, user_id: users[i].user_id}) %> 
         <% } %>
-    </ul>
-
+    </ul> <br>
+    
     <form action="/sign-out" method="post">
         <button>Sign Out</button>
     </form>
